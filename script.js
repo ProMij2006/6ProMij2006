@@ -60,11 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         let additionalCost = 0;
+        let totalCost = basePrice * quantity;
         if (selectedTypeVal === "2") {
             additionalCost = parseInt(
                 productSelect.value,
                 10
             );
+            totalCost = (basePrice + additionalCost) * quantity;
         } else if (selectedTypeVal === "3") {
             if (propertyCheckbox.checked) {
                 additionalCost = parseInt(
@@ -72,9 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     10
                 );
             }
+            totalCost = basePrice * quantity + additionalCost;
         }
-
-        const totalCost = (basePrice + additionalCost) * quantity;
         let a = "Стоимость заказа: ";
         let b = " руб.";
         resultDiv.textContent = a + totalCost.toLocaleString("ru-RU") + b;
