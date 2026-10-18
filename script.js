@@ -27,12 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantityValue = quantityInput.value.trim();
         const regex = /^[0-9]+$/;
 
-        if (quantityValue === "" ||
-                !regex.test(quantityValue) ||
-                parseInt(quantityValue, 10) <= 0) {
+        if (
+            quantityValue === "" ||
+            !regex.test(quantityValue) ||
+            parseInt(quantityValue, 10) <= 0
+        ) {
             quantityInput.classList.add("is-invalid");
-            errorDiv.textContent =
-                "Нужно вводить только целые числа больше нуля!";
+            errorDiv.textContent = "Введите число больше нуля!";
             resultDiv.textContent = "";
             return;
         }
@@ -61,21 +62,22 @@ document.addEventListener("DOMContentLoaded", function () {
         let additionalCost = 0;
         if (selectedTypeVal === "2") {
             additionalCost = parseInt(
-                productSelect.value, 10
+                productSelect.value,
+                10
             );
         } else if (selectedTypeVal === "3") {
             if (propertyCheckbox.checked) {
                 additionalCost = parseInt(
-                    propertyCheckbox.value, 10
+                    propertyCheckbox.value,
+                    10
                 );
             }
         }
 
-        const totalCost = (basePrice + additionalCost) *
-            quantity;
-        resultDiv.textContent =
-            "Стоимость заказа: " +
-            totalCost.toLocaleString("ru-RU") + " руб.";
+        const totalCost = (basePrice + additionalCost) * quantity;
+        let a = "Стоимость заказа: ";
+        let b = " руб.";
+        resultDiv.textContent = a + totalCost.toLocaleString("ru-RU") + b;
     }
 
     function updateFormVisibility() {
