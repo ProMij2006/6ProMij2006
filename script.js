@@ -1,10 +1,24 @@
+/*jslint browser: true */
 document.addEventListener("DOMContentLoaded", function () {
-    const quantityInput = document.getElementById("quantityInput");
-    const radioTypes = document.querySelectorAll("input[name='serviceType']");
-    const selectContainer = document.getElementById("selectContainer");
-    const productSelect = document.getElementById("productSelect");
-    const checkboxContainer = document.getElementById("checkboxContainer");
-    const propertyCheckbox = document.getElementById("propertyCheckbox");
+    "use strict";
+    const quantityInput = document.getElementById(
+        "quantityInput"
+    );
+    const radioTypes = document.querySelectorAll(
+        "input[name='serviceType']"
+    );
+    const selectContainer = document.getElementById(
+        "selectContainer"
+    );
+    const productSelect = document.getElementById(
+        "productSelect"
+    );
+    const checkboxContainer = document.getElementById(
+        "checkboxContainer"
+    );
+    const propertyCheckbox = document.getElementById(
+        "propertyCheckbox"
+    );
     const calcBtn = document.getElementById("calcBtn");
     const resultDiv = document.getElementById("result");
     const errorDiv = document.getElementById("error");
@@ -13,9 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantityValue = quantityInput.value.trim();
         const regex = /^[0-9]+$/;
 
-        if (quantityValue === "" || !regex.test(quantityValue) || parseInt(quantityValue, 10) <= 0) {
+        if (quantityValue === "" ||
+                !regex.test(quantityValue) ||
+                parseInt(quantityValue, 10) <= 0) {
             quantityInput.classList.add("is-invalid");
-            errorDiv.textContent = "Нужно вводить только целые числа больше нуля!";
+            errorDiv.textContent =
+                "Нужно вводить только целые числа больше нуля!";
             resultDiv.textContent = "";
             return;
         }
@@ -43,15 +60,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let additionalCost = 0;
         if (selectedTypeVal === "2") {
-            additionalCost = parseInt(productSelect.value, 10);
+            additionalCost = parseInt(
+                productSelect.value, 10
+            );
         } else if (selectedTypeVal === "3") {
             if (propertyCheckbox.checked) {
-                additionalCost = parseInt(propertyCheckbox.value, 10);
+                additionalCost = parseInt(
+                    propertyCheckbox.value, 10
+                );
             }
         }
 
-        const totalCost = (basePrice + additionalCost) * quantity;
-        resultDiv.textContent = "Стоимость заказа: " + totalCost.toLocaleString('ru-RU') + " руб.";
+        const totalCost = (basePrice + additionalCost) *
+            quantity;
+        resultDiv.textContent =
+            "Стоимость заказа: " +
+            totalCost.toLocaleString("ru-RU") + " руб.";
     }
 
     function updateFormVisibility() {
@@ -73,13 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
             checkboxContainer.style.display = "block";
         }
 
-        calculate(); 
+        calculate();
     }
 
     quantityInput.addEventListener("input", calculate);
 
     radioTypes.forEach(function (radio) {
-        radio.addEventListener("change", updateFormVisibility);
+        radio.addEventListener(
+            "change",
+            updateFormVisibility
+        );
     });
 
     productSelect.addEventListener("change", calculate);
